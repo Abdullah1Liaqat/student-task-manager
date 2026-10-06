@@ -2,6 +2,8 @@ const form = document.getElementById("task-form");
 const titleInput = document.getElementById("task-title");
 const descInput = document.getElementById("task-description");
 const list = document.getElementById("task-list");
+const searchInput = document.getElementById("search-input");
+let query = "";
 
 let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
@@ -11,7 +13,10 @@ function save() {
 
 function render() {
   list.innerHTML = "";
-  tasks.forEach((task) => {
+  const visible = tasks.filter((t) =>
+    (t.title + " " + t.description).toLowerCase().includes(query)
+  );
+  visible.forEach((task) => {
     const li = document.createElement("li");
     li.className = "task" + (task.done ? " done" : "");
 
@@ -62,6 +67,11 @@ form.addEventListener("submit", (e) => {
   });
   save();
   form.reset();
+  render();
+});
+
+searchInput.addEventListener("input", (e) => {
+  query = e.target.value.trim().toLowerCase();
   render();
 });
 
