@@ -149,3 +149,12 @@ button {
     flex: 1;
   }
 }
+
+#search-input {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font: inherit;
+}
